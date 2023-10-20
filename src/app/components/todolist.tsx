@@ -1,3 +1,4 @@
+import AddNewTodo from "./addnewtodo";
 import Progressbar from "./progressbar";
 import TodoItem from "./todoitem";
 
@@ -17,6 +18,7 @@ export default function Todolist() {
         {lista.individual.map((item) => (
           <TodoItem checked={item.checked} text={item.text} onChange={false}/>
         ))}  
+        <AddNewTodo />
         <Progressbar    
             numberOfItems={lista.individual.length}
             currentItems={Object.values(lista.individual).reduce((a, { checked }) => a + +checked, 0)}
