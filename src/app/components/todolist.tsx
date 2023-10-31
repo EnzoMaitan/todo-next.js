@@ -34,7 +34,7 @@ export default function Todolist() {
         <AddNewTodo onSaveJSON={saveJSON} />
         <Progressbar    
             numberOfItems={lista.individual.length}
-            currentCheckedItems={Object.entries(lista.individual).reduce((accumulator, checked ) => accumulator + +checked, 0)} 
+            currentCheckedItems={Object.values(lista.individual).reduce((accumulator: number, checked: any ) => accumulator + checked ? 1 : 0, 0)} 
         />
         </section>
     )
