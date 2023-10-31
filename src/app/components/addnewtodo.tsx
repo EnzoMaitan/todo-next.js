@@ -4,28 +4,28 @@ import { useState } from "react";
 
 export default function AddNewTodo({ onSaveJSON } : any){
   
-    type JsonObject = {
+    type TodoItemJSON = {
         checked: boolean,
         text: string;
     };
     
     type TextAreaToJSONProps = {
-        onSaveJSON: (data: JsonObject | null) => void;
+        onSaveJSON: (data: TodoItemJSON | null) => void;
     };
 
     const [inputValue, setInputValue] = useState<string>("");
-    const [jsonObject, setJsonObject] = useState<JsonObject | null>(null);
+    const [todoItemJSON, setJsonObject] = useState<TodoItemJSON | null>(null);
     
     const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
             if (inputValue.trim()) {
-                const newJsonObject: JsonObject = {
+                const newTodoItemJSON: TodoItemJSON = {
                     checked: false,
                     text: inputValue.trim(),
                 };
-                setJsonObject(newJsonObject);
-                onSaveJSON(newJsonObject);
+                setJsonObject(newTodoItemJSON);
+                onSaveJSON(newTodoItemJSON);
                 setInputValue("");
             }
         }
@@ -33,9 +33,9 @@ export default function AddNewTodo({ onSaveJSON } : any){
         return (
             <div>
                 <textarea 
-                        value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyUp={handleKeyPress}
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyUp={handleKeyPress}
                     placeholder="Add a new task"/>
             </div>
         );

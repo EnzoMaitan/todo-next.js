@@ -7,7 +7,12 @@ import TodoItem from "./todoitem";
 
 var temp = {
     "title": "",
-    "individual": []     
+    "individual": [
+        {
+            "checked": true,
+            "text": "fghfg"
+        }
+    ]
 };
 
 export default function Todolist() {
@@ -23,13 +28,13 @@ export default function Todolist() {
     return (
         <section>
         <h2>{lista.title}</h2>
-        {lista.individual.map((item) => (
-          <TodoItem checked={item.checked} text={item.text} onChange={false}/>
+        {lista.individual.map((item: any) => (
+          <TodoItem key={item.text} checked={item.checked} text={item.text} onChange={false}/>
         ))}  
         <AddNewTodo onSaveJSON={saveJSON} />
         <Progressbar    
             numberOfItems={lista.individual.length}
-            currentItems={Object.values(lista.individual).reduce((a, { checked }) => a + +checked, 0)} 
+            currentCheckedItems={Object.entries(lista.individual).reduce((accumulator, checked ) => accumulator + +checked, 0)} 
         />
         </section>
     )

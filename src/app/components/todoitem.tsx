@@ -1,7 +1,7 @@
-export default function TodoItem({checked, text ,onChange}: {checked : boolean, text: string,onChange: any}) {
+export default function TodoItem({checked, text ,onChange}: {checked : boolean, text: string, onChange: any}) {
     return (
         <div>
-            <input type="checkbox" checked={checked} onChange={onChange} id="topping" name="topping" value="test check" />{text}
+            <input type="checkbox" defaultChecked={checked} onChange={onChange} id="topping" name="topping" value="test check" />{text}
         </div>
     )
   }

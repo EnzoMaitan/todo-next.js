@@ -1,8 +1,10 @@
 "use client"
 
-export default function Progressbar({currentItems, numberOfItems}: {currentItems : number, numberOfItems: number}) {    
+export default function Progressbar({currentCheckedItems: currentCheckedItems, numberOfItems}: {currentCheckedItems : number, numberOfItems: number}) {    
     const calculateProgress = () =>{
-         return (100 * currentItems) / numberOfItems;
+        console.log("current:" + currentCheckedItems);
+        console.log("number:" + numberOfItems);
+         return (100 * currentCheckedItems) / numberOfItems;
     };
     
     return (
