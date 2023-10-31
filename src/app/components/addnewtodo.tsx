@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function AddNewTodo({ onSaveJSON } : any){
   
     type TodoItemJSON = {
+        id: number, 
         checked: boolean,
         text: string;
     };
@@ -21,6 +22,7 @@ export default function AddNewTodo({ onSaveJSON } : any){
         event.preventDefault();
             if (inputValue.trim()) {
                 const newTodoItemJSON: TodoItemJSON = {
+                    id: -1,
                     checked: false,
                     text: inputValue.trim(),
                 };
