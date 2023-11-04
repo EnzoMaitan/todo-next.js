@@ -10,7 +10,15 @@ var temp = {
     "individual": [
         {
             "id": 0,
-            "checked": false,
+            "checked": true,
+            "text": "fghfg"
+        },{
+            "id": 1,
+            "checked": true,
+            "text": "fghfg"
+        },{
+            "id": 2,
+            "checked": true,
             "text": "fghfg"
         }
     ]
@@ -18,38 +26,51 @@ var temp = {
 var idSimulator = temp.individual.length; //REMOVE ONCE DB HAS BEEN ADDED
 
 export default function Todolist() {
-    const [jsonObject, setJsonObject] = useState<any | null>(null);
     const [lista, setLista] = useState<any | null>(temp);
+    const [jsonObject, setJsonObject] = useState<any | null>(null);
 
+    /**
+     * Calculates the percentage of completed tasks
+     */
+    const calculateProgress = (): number => {
+        let checked = (Object.values(lista.individual).reduce((accumulator: number, individual: any ) => individual.checked ? accumulator + individual.checked: accumulator, 0));
+        let total = lista.individual.length;
+        return (100 * checked) / total;
+    };
+
+    const [progress, setProgress] = useState<any | null>(()=>calculateProgress());
+
+    /**
+     * Saves the new task to the list as JSON
+     */
     const saveJSON = (data: any | null) => {
         data.id = idSimulator; //UPDATE ONCE DB HAS BEEN ADDED
         idSimulator++; //REMOVE ONCE DB HAS BEEN ADDED
         setJsonObject(data);
+        setProgress(()=>calculateProgress());
         lista.individual.push(data);
     };
     
-    const changeCheked = (id: number) => {
+    /**
+     * Saves the changed checked atribute on the list
+     */
+    const changeChecked = (id: number) => {
         lista.individual[id].checked = !lista.individual[id].checked;
-        
-        console.log(lista);
-    };
-
-
-    let getAmountChecked = (): number => {
-        return (Object.values(lista.individual).reduce((accumulator: number, checked: any ) => accumulator + checked ? 1 : 0, 0))
+        setLista(temp);
+        setProgress(()=>calculateProgress());
     };
 
     return (
         <section>
         <h2>{lista.title}</h2>
         {lista.individual.map((item: any) => (
-          <TodoItem key={item.id} checked={item.checked} text={item.text} onClick={()=>changeCheked(item.id)}/>
+          <TodoItem key={item.id} 
+                    checked={item.checked} 
+                    text={item.text} 
+                    onClick={()=>changeChecked(item.id)}/>
         ))}  
         <AddNewTodo onSaveJSON={saveJSON} />
-        <Progressbar    
-            numberOfItems={lista.individual.length}
-            currentCheckedItems={getAmountChecked()} 
-        />
+        <Progressbar progress={progress} />
         </section>
     )
 }
