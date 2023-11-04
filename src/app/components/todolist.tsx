@@ -6,20 +6,20 @@ import Progressbar from "./progressbar";
 import TodoItem from "./todoitem";
 
 var temp = {
-    "title": "",
+    "title": "test title",
     "individual": [
         {
             "id": 0,
             "checked": true,
-            "text": "fghfg"
+            "text": "test 1"
         },{
             "id": 1,
-            "checked": true,
-            "text": "fghfg"
+            "checked": false,
+            "text": "test 2"
         },{
             "id": 2,
-            "checked": true,
-            "text": "fghfg"
+            "checked": false,
+            "text": "test 3"
         }
     ]
 };
